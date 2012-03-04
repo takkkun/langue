@@ -1,12 +1,10 @@
 require 'active_support/core_ext/string/inflections'
 
 module Langue
-  class Language
-    class << self
-      alias __name__ name
-
-      def name
-        __name__.split('::').last.underscore
+  module Language
+    module ClassMethods
+      def id
+        name.split('::').last.underscore
       end
 
       def depend_to(orig_method_name, *gems)
@@ -20,6 +18,10 @@ module Langue
           value
         end
       end
+    end
+
+    def self.included(klass)
+      klass.extend(ClassMethods)
     end
 
     def initialize(options = {})

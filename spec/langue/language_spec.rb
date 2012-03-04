@@ -1,7 +1,9 @@
 require 'langue/language'
 
 module Example
-  class LanguageExample < Langue::Language
+  class LanguageExample
+    include Langue::Language
+
     def parse(text)
       text
     end
@@ -9,9 +11,9 @@ module Example
   end
 end
 
-describe Langue::Language, '.name' do
+describe Langue::Language, '.id' do
   it 'returns the class name based underscore' do
-    Example::LanguageExample.name.should == 'language_example'
+    Example::LanguageExample.id.should == 'language_example'
   end
 end
 
