@@ -1,5 +1,6 @@
 require 'langue/version'
 require 'langue/exceptions'
+require 'langue/language'
 
 module Langue
   extend self

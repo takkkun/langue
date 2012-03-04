@@ -1,5 +1,4 @@
 require 'langue'
-require 'langue/language'
 
 class LanguageExample;      include Langue::Language; end
 class OtherLanguageExample; include Langue::Language; end
