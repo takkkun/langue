@@ -1,8 +1,34 @@
 require 'langue/morphemes'
 
+describe Langue::Morphemes, '#valid?' do
+  before do
+    @morphemes = described_class.new([
+      Langue::Morpheme.new({}),
+      Langue::Morpheme.new({}),
+      Langue::Morpheme.new({})
+    ])
+  end
+
+  context 'with all morphemes' do
+    it 'returns true' do
+      @morphemes.should be_valid
+    end
+  end
+
+  context 'with including non-morpheme' do
+    before do
+      @morphemes[1] = 'invalid_as_morpheme'
+    end
+
+    it do
+      @morphemes.should_not be_valid
+    end
+  end
+end
+
 describe Langue::Morphemes, '#at' do
   before do
-    @morphemes = described_class[1, 2, 3]
+    @morphemes = described_class.new([1, 2, 3])
   end
 
   it 'returns a morpheme at the position of the index' do
