@@ -45,3 +45,16 @@ module Langue
     raise LanguageUnsupported, "'#{name}' language is unsupported"
   end
 end
+
+begin
+  require 'rubygems' unless Object.const_defined?(:Gem)
+  gems = {}
+
+  Gem.source_index.each do |name_with_version, spec|
+    name = spec.name
+    version = spec.version
+    gems[name] = version if name =~ /^langue-/ && (!gems[name] || gems[name] < version)
+  end
+
+  gems.keys.each(&method(:require))
+end
