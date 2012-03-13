@@ -1,7 +1,7 @@
 require 'langue'
 
-class LanguageExample;      include Langue::Language; end
-class OtherLanguageExample; include Langue::Language; end
+class LanguageExample      < Langue::Language; end
+class OtherLanguageExample < Langue::Language; end
 
 describe Langue do
   it 'is an instance of Module' do

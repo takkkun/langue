@@ -1,9 +1,7 @@
 require 'langue/language'
 
 module Example
-  class LanguageExample
-    include Langue::Language
-
+  class LanguageExample < Langue::Language
     def parse(text)
       text
     end

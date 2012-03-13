@@ -1,8 +1,8 @@
 require 'active_support/core_ext/string/inflections'
 
 module Langue
-  module Language
-    module ClassMethods
+  class Language
+    class << self
       def id
         name.split('::').last.underscore
       end
@@ -18,10 +18,6 @@ module Langue
           value
         end
       end
-    end
-
-    def self.included(klass)
-      klass.extend(ClassMethods)
     end
 
     def initialize(options = {})
