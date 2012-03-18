@@ -1,5 +1,31 @@
 require 'langue/sentence'
 
+describe Langue::Sentence, '#valid?' do
+  before do
+    @sentence = described_class.new([
+      Langue::Word.new,
+      Langue::Word.new,
+      Langue::Word.new
+    ])
+  end
+
+  context 'with all words' do
+    it 'returns true' do
+      @sentence.should be_valid
+    end
+  end
+
+  context 'with including non-word' do
+    before do
+      @sentence[1] = 'invalid_as_word'
+    end
+
+    it 'returns false' do
+      @sentence.should_not be_valid
+    end
+  end
+end
+
 describe Langue::Sentence, '#words' do
   before do
     sentence = described_class.new([[1, 2], [3, 4]])

@@ -25,13 +25,27 @@ Or install it yourself as:
 Usage
 -----
 
-    require 'langue'
+    # coding: utf-8
     require 'langue-japanese'
 
-    language = Langue['japanese']
+    # Get a language class
+    language = Langue['japanese'].new
 
-    # Get a tokenizer for Japanese
-    tokenizer = language.create_tokenizer(tokenizer_options)
+    # Split to morphemes a text
+    morphemes = language.parse('今日は妹と一緒にお買い物してきたよ。楽しかった〜')
+
+    # Create a structured text from the morphemes
+    text = language.structure(morphemes)
+
+    # When using English
+    require 'langue-english'
+
+    other_language = Langue['english'].new
+
+If tiresome to require gem for each language, you will write the code following
+instead:
+
+    require 'langue/all'
 
 Contributing
 ------------

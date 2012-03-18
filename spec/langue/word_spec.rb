@@ -1,5 +1,46 @@
 require 'langue/word'
 
+describe Langue::Word, '#valid?' do
+  before do
+    @word = described_class.new([
+      Langue::Morpheme.new({}),
+      Langue::Morpheme.new({}),
+      Langue::Morpheme.new({})
+    ])
+  end
+
+  context 'with all morphemes' do
+    it 'returns true' do
+      @word.should be_valid
+    end
+  end
+
+  context 'with including non-morpheme' do
+    before do
+      @word[1] = 'invalid_as_morpheme'
+    end
+
+    it 'returns false' do
+      @word.should_not be_valid
+    end
+  end
+end
+
+describe Langue::Word, '#morphemes' do
+  before do
+    word = described_class.new([1, 2, 3])
+    @morphemes = word.morphemes
+  end
+
+  it 'returns an instance of Langue::Morphemes' do
+    @morphemes.should be_a Langue::Morphemes
+  end
+
+  it 'returns ' do
+    @morphemes.should == [1, 2, 3]
+  end
+end
+
 describe Langue::Word, '#key_morpheme' do
   before do
     word = described_class.new([1, 2, 3])
@@ -19,21 +60,6 @@ describe Langue::Word, '#key_morpheme' do
     it 'returns nil' do
       @morpheme.should be_nil
     end
-  end
-end
-
-describe Langue::Word, '#morphemes' do
-  before do
-    word = described_class.new([1, 2, 3])
-    @morphemes = word.morphemes
-  end
-
-  it 'returns an instance of Langue::Morphemes' do
-    @morphemes.should be_a Langue::Morphemes
-  end
-
-  it 'returns ' do
-    @morphemes.should == [1, 2, 3]
   end
 end
 

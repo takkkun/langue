@@ -1,5 +1,11 @@
+require 'langue/morpheme'
+
 module Langue
   class Morphemes < Array
+    def valid?
+      all? {|morpheme| Morpheme === morpheme}
+    end
+
     def at(index)
       morpheme = self[index]
       morpheme.nil? || !block_given? ? morpheme : yield(morpheme)

@@ -3,10 +3,8 @@ require 'active_support/core_ext/string/inflections'
 module Langue
   class Language
     class << self
-      alias __name__ name
-
-      def name
-        __name__.split('::').last.underscore
+      def id
+        name.split('::').last.underscore
       end
 
       def depend_to(orig_method_name, *gems)

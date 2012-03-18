@@ -1,12 +1,17 @@
 require 'langue/morphemes'
+require 'langue/morpheme'
 
 module Langue
   class Word < Array
-    alias key_morpheme last
+    def valid?
+      all? {|morpheme| Morpheme === morpheme}
+    end
 
     def morphemes
       @morphemes ||= Morphemes.new(self)
     end
+
+    alias key_morpheme last
 
     def text
       @text = not_empty? { map(&:text) } unless instance_variable_defined?(:@text)
