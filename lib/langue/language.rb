@@ -1,10 +1,14 @@
 require 'active_support/core_ext/string/inflections'
 
+require 'langue/exceptions'
+
 module Langue
   class Language
     class << self
       def id
-        name.split('::').last.underscore
+        parts = name.split('::').reverse.drop_while { |part| part == 'Language' }
+        raise InvalidDefinition, "'#{name}' is invalid definition" if parts.empty?
+        parts.first.underscore
       end
 
       def depend_to(orig_method_name, *gems)
