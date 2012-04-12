@@ -22,5 +22,9 @@ module Langue
       expected = [part_of_speech] + categories
       expected.zip(got).all? { |pair| pair[0] == pair[1] }
     end
+
+    def inflected?(inflection)
+      @inflection == inflection
+    end
   end
 end

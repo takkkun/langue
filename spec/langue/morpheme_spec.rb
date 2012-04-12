@@ -89,3 +89,17 @@ describe Langue::Morpheme, '#classified?' do
     end
   end
 end
+
+describe Langue::Morpheme, '#inflected?' do
+  before do
+    @morpheme = described_class.new(:inflection => 'inflection')
+  end
+
+  it 'returns true if inflection matched' do
+    @morpheme.should be_inflected('inflection')
+  end
+
+  it 'returns false if inflection did not match' do
+    @morpheme.should_not be_inflected('inflecti0n')
+  end
+end
