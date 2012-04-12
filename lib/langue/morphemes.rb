@@ -3,7 +3,7 @@ require 'langue/morpheme'
 module Langue
   class Morphemes < Array
     def valid?
-      all? {|morpheme| Morpheme === morpheme}
+      all? { |morpheme| Morpheme === morpheme }
     end
 
     def at(index)

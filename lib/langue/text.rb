@@ -4,7 +4,7 @@ require 'langue/sentence'
 module Langue
   class Text < Array
     def valid?
-      all? {|sentence| Sentence === sentence && sentence.valid?}
+      all? { |sentence| Sentence === sentence && sentence.valid? }
     end
 
     def sentences

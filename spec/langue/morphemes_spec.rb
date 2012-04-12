@@ -45,21 +45,21 @@ describe Langue::Morphemes, '#at' do
 
   context 'with a block' do
     it 'passes to the block a morpheme at the position of the index' do
-      @morphemes.at(0) {|morpheme| morpheme.should == 1}
+      @morphemes.at(0) { |morpheme| morpheme.should == 1 }
     end
 
     it 'returns the value returned from the block' do
-      value = @morphemes.at(0) {|morpheme| 'value'}
+      value = @morphemes.at(0) { |morpheme| 'value' }
       value.should == 'value'
     end
 
     context 'with do not have a morpheme at the position of the index' do
       it 'does not call the block' do
-        lambda { @morphemes.at(3) {|morpheme| fail} }.should_not raise_error
+        lambda { @morphemes.at(3) { |morpheme| fail } }.should_not raise_error
       end
 
       it 'returns nil' do
-        value = @morphemes.at(3) {|morpheme| fail}
+        value = @morphemes.at(3) { |morpheme| fail }
         value.should be_nil
       end
     end

@@ -66,9 +66,9 @@ end
 describe Langue::Word, '#text' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:text).and_return('text1')},
-      stub.tap {|s| s.stub!(:text).and_return('text2')},
-      stub.tap {|s| s.stub!(:text).and_return('text3')}
+      stub.tap { |s| s.stub!(:text).and_return('text1') },
+      stub.tap { |s| s.stub!(:text).and_return('text2') },
+      stub.tap { |s| s.stub!(:text).and_return('text3') }
     ])
 
     @text = word.text
@@ -82,9 +82,9 @@ end
 describe Langue::Word, '#inflection' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:inflection).and_return('inflection1')},
-      stub.tap {|s| s.stub!(:inflection).and_return('inflection2')},
-      stub.tap {|s| s.stub!(:inflection).and_return('inflection3')},
+      stub.tap { |s| s.stub!(:inflection).and_return('inflection1') },
+      stub.tap { |s| s.stub!(:inflection).and_return('inflection2') },
+      stub.tap { |s| s.stub!(:inflection).and_return('inflection3') }
     ])
 
     @inflection = word.inflection
@@ -109,9 +109,9 @@ end
 describe Langue::Word, '#inflection_type' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:inflection_type).and_return('inflection_type1')},
-      stub.tap {|s| s.stub!(:inflection_type).and_return('inflection_type2')},
-      stub.tap {|s| s.stub!(:inflection_type).and_return('inflection_type3')},
+      stub.tap { |s| s.stub!(:inflection_type).and_return('inflection_type1') },
+      stub.tap { |s| s.stub!(:inflection_type).and_return('inflection_type2') },
+      stub.tap { |s| s.stub!(:inflection_type).and_return('inflection_type3') }
     ])
 
     @inflection_type = word.inflection_type
@@ -136,9 +136,9 @@ end
 describe Langue::Word, '#root_form' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:text).and_return('text1')},
-      stub.tap {|s| s.stub!(:text).and_return('text2')},
-      stub.tap {|s| s.stub!(:root_form).and_return('root_form3')},
+      stub.tap { |s| s.stub!(:text).and_return('text1') },
+      stub.tap { |s| s.stub!(:text).and_return('text2') },
+      stub.tap { |s| s.stub!(:root_form).and_return('root_form3') }
     ])
 
     @root_form = word.root_form
@@ -151,7 +151,7 @@ describe Langue::Word, '#root_form' do
   context 'with have a morpheme' do
     before do
       word = described_class.new([
-        stub.tap {|s| s.stub!(:root_form).and_return('root_form1')}
+        stub.tap { |s| s.stub!(:root_form).and_return('root_form1') }
       ])
 
       @root_form = word.root_form
@@ -177,9 +177,9 @@ end
 describe Langue::Word, '#yomi' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:yomi).and_return('yomi1')},
-      stub.tap {|s| s.stub!(:yomi).and_return('yomi2')},
-      stub.tap {|s| s.stub!(:yomi).and_return('yomi3')},
+      stub.tap { |s| s.stub!(:yomi).and_return('yomi1') },
+      stub.tap { |s| s.stub!(:yomi).and_return('yomi2') },
+      stub.tap { |s| s.stub!(:yomi).and_return('yomi3') }
     ])
 
     @yomi = word.yomi
@@ -192,9 +192,9 @@ describe Langue::Word, '#yomi' do
   context 'with have morpheme without a yomi' do
     before do
       word = described_class.new([
-        stub.tap {|s| s.stub!(:yomi).and_return('yomi1')},
-        stub.tap {|s| s.stub!(:yomi).and_return(nil)},
-        stub.tap {|s| s.stub!(:yomi).and_return('yomi3')},
+        stub.tap { |s| s.stub!(:yomi).and_return('yomi1') },
+        stub.tap { |s| s.stub!(:yomi).and_return(nil)     },
+        stub.tap { |s| s.stub!(:yomi).and_return('yomi3') }
       ])
 
       @yomi = word.yomi
@@ -220,9 +220,9 @@ end
 describe Langue::Word, '#pronunciation' do
   before do
     word = described_class.new([
-      stub.tap {|s| s.stub!(:pronunciation).and_return('pronunciation1')},
-      stub.tap {|s| s.stub!(:pronunciation).and_return('pronunciation2')},
-      stub.tap {|s| s.stub!(:pronunciation).and_return('pronunciation3')},
+      stub.tap { |s| s.stub!(:pronunciation).and_return('pronunciation1') },
+      stub.tap { |s| s.stub!(:pronunciation).and_return('pronunciation2') },
+      stub.tap { |s| s.stub!(:pronunciation).and_return('pronunciation3') }
     ])
 
     @pronunciation = word.pronunciation
@@ -235,9 +235,9 @@ describe Langue::Word, '#pronunciation' do
   context 'with have morpheme without a pronunciation' do
     before do
       word = described_class.new([
-        stub.tap {|s| s.stub!(:pronunciation).and_return('pronunciation1')},
-        stub.tap {|s| s.stub!(:pronunciation).and_return(nil)},
-        stub.tap {|s| s.stub!(:pronunciation).and_return('pronunciation3')},
+        stub.tap { |s| s.stub!(:pronunciation).and_return('pronunciation1') },
+        stub.tap { |s| s.stub!(:pronunciation).and_return(nil)              },
+        stub.tap { |s| s.stub!(:pronunciation).and_return('pronunciation3') }
       ])
 
       @pronunciation = word.pronunciation

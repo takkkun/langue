@@ -4,7 +4,7 @@ require 'langue/morpheme'
 module Langue
   class Word < Array
     def valid?
-      all? {|morpheme| Morpheme === morpheme}
+      all? { |morpheme| Morpheme === morpheme }
     end
 
     def morphemes
@@ -57,7 +57,7 @@ module Langue
     def join_values(key)
       empty? ? nil : begin
                        values = map(&key)
-                       values.any? {|value| value.nil?} ? nil : values.join
+                       values.any? { |value| value.nil? } ? nil : values.join
                      end
     end
   end

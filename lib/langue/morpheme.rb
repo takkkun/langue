@@ -9,10 +9,10 @@ module Langue
       root_form
       yomi
       pronunciation
-    ).map &:to_sym
+    ).map(&:to_sym)
 
     def initialize(attrs)
-      KEYS.each {|key| instance_variable_set("@#{key}", attrs[key])}
+      KEYS.each { |key| instance_variable_set("@#{key}", attrs[key]) }
     end
 
     attr_reader(*KEYS)
