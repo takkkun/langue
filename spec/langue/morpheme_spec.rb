@@ -49,32 +49,43 @@ end
 
 describe Langue::Morpheme, '#classified?' do
   before do
-    @morpheme = described_class.new(:categories => %w(category1 category2))
+    @morpheme = described_class.new(
+      :part_of_speech => 'part_of_speech',
+      :categories     => %w(category1 category2)
+    )
+  end
+
+  it 'returns true if part of speech matched' do
+    @morpheme.should be_classified('part_of_speech')
+  end
+
+  it 'returns false if part of speech did not match' do
+    @morpheme.should_not be_classified('part_0f_speech')
   end
 
   context 'with fewer than the categories' do
     it 'returns true if matched' do
-      @morpheme.classified?('category1').should be_true
+      @morpheme.should be_classified('part_of_speech', 'category1')
     end
 
     it 'returns false if not matched' do
-      @morpheme.classified?('category10').should be_false
+      @morpheme.should_not be_classified('part_of_speech', 'category10')
     end
   end
 
   context 'with equal to the categories' do
     it 'returns true if matched' do
-      @morpheme.classified?('category1', 'category2').should be_true
+      @morpheme.should be_classified('part_of_speech', 'category1', 'category2')
     end
 
     it 'returns false if not matched' do
-      @morpheme.classified?('category1', 'category20').should be_false
+      @morpheme.should_not be_classified('part_of_speech', 'category1', 'category20')
     end
   end
 
   context 'with many than the categories' do
     it 'returns false' do
-      @morpheme.classified?('category1', 'category2', 'category3').should be_false
+      @morpheme.should_not be_classified('part_of_speech', 'category1', 'category2', 'category3')
     end
   end
 end

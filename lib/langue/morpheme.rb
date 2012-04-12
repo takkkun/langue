@@ -17,8 +17,10 @@ module Langue
 
     attr_reader(*KEYS)
 
-    def classified?(*categories)
-      categories.zip(@categories).all? {|c| c[0] == c[1]}
+    def classified?(part_of_speech, *categories)
+      got = [@part_of_speech] + @categories
+      expected = [part_of_speech] + categories
+      expected.zip(got).all? { |pair| pair[0] == pair[1] }
     end
   end
 end
