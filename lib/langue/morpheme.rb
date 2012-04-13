@@ -9,16 +9,22 @@ module Langue
       root_form
       yomi
       pronunciation
-    ).map &:to_sym
+    ).map(&:to_sym)
 
     def initialize(attrs)
-      KEYS.each {|key| instance_variable_set("@#{key}", attrs[key])}
+      KEYS.each { |key| instance_variable_set("@#{key}", attrs[key]) }
     end
 
     attr_reader(*KEYS)
 
-    def classified?(*categories)
-      categories.zip(@categories).all? {|c| c[0] == c[1]}
+    def classified?(part_of_speech, *categories)
+      got = [@part_of_speech] + @categories
+      expected = [part_of_speech] + categories
+      expected.zip(got).all? { |pair| pair[0] == pair[1] }
+    end
+
+    def inflected?(inflection)
+      @inflection == inflection
     end
   end
 end
