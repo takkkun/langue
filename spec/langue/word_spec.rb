@@ -1,5 +1,30 @@
 require 'langue/word'
 
+describe Langue do
+  %w(
+    Noun
+    Pronoun
+    Adjective
+    Verb
+    Adverb
+    Particle
+    Conjunction
+    Determiner
+    Interjection
+    Period
+  ).each do |part_of_speech|
+    it "has #{described_class}::#{part_of_speech}" do
+      Langue.should be_const_defined(part_of_speech)
+    end
+
+    describe part_of_speech do
+      it 'inherits Langue::Word' do
+        Langue.const_get(part_of_speech).superclass.should == Langue::Word
+      end
+    end
+  end
+end
+
 describe Langue::Word, '#valid?' do
   before do
     @word = described_class.new([
@@ -36,7 +61,7 @@ describe Langue::Word, '#morphemes' do
     @morphemes.should be_a Langue::Morphemes
   end
 
-  it 'returns ' do
+  it 'returns own morphemes' do
     @morphemes.should == [1, 2, 3]
   end
 end
