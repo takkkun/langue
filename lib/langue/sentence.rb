@@ -14,5 +14,10 @@ module Langue
     def morphemes
       @morphemes ||= Morphemes.new(flatten)
     end
+
+    def text
+      @text = empty? ? nil : map(&:text).join unless instance_variable_defined?(:@text)
+      @text
+    end
   end
 end

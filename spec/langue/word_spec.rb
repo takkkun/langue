@@ -89,18 +89,19 @@ describe Langue::Word, '#key_morpheme' do
 end
 
 describe Langue::Word, '#text' do
-  before do
+  it 'returns a concatenated string of the text of the morphemes' do
     word = described_class.new([
       stub.tap { |s| s.stub!(:text).and_return('text1') },
       stub.tap { |s| s.stub!(:text).and_return('text2') },
       stub.tap { |s| s.stub!(:text).and_return('text3') }
     ])
 
-    @text = word.text
+    word.text.should == 'text1text2text3'
   end
 
-  it 'returns a concatenated string of the text of the morphemes' do
-    @text.should == 'text1text2text3'
+  it 'returns nil if the word is empty' do
+    word = described_class.new
+    word.text.should be_nil
   end
 end
 
