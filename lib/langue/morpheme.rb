@@ -17,6 +17,11 @@ module Langue
 
     attr_reader(*KEYS)
 
+    def ==(other_morpheme)
+      return false unless other_morpheme.is_a?(self.class)
+      KEYS.all? { |key| self.__send__(key) == other_morpheme.__send__(key) }
+    end
+
     def classified?(part_of_speech, *categories)
       got = [@part_of_speech] + @categories
       expected = [part_of_speech] + categories
