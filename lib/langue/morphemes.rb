@@ -12,7 +12,7 @@ module Langue
     end
 
     def pad(text)
-      whitespace_regexp = /^([\x09\x0A\x0B\x20])+/
+      whitespace_regexp = /^([\x09\x0A\x0B\x0D\x20])+/
       differece_error = ArgumentError.new('maybe different from the original text')
 
       morphemes = Morphemes.new

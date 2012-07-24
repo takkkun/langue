@@ -109,6 +109,17 @@ describe Langue::Morphemes, '#pad' do
     morpheme.root_form.should == "\x0B"
   end
 
+  it 'pads \\x0D' do
+    padded_morphemes = @morphemes.pad("text1\x0Dtext2text3\x0D")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x0D"
+    morpheme.root_form.should == "\x0D"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x0D"
+    morpheme.root_form.should == "\x0D"
+  end
+
   it 'pads \\x20' do
     padded_morphemes = @morphemes.pad("text1\x20text2text3\x20")
     padded_morphemes.should have(5).items
