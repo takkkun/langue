@@ -54,6 +54,14 @@ describe Langue::Text, '#words' do
   it 'returns the words in the sentences' do
     @words.should == [[1, 2], [3, 4], [5, 6], [7, 8]]
   end
+
+  context 'with an empty text' do
+    it 'returns an empty array' do
+      text = described_class.new([])
+      text.words.should be_an(Array)
+      text.words.should be_empty
+    end
+  end
 end
 
 describe Langue::Text, '#morphemes' do

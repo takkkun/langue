@@ -12,7 +12,7 @@ module Langue
     end
 
     def words
-      @words ||= inject(&:+)
+      @words ||= inject([], &:+)
     end
 
     def morphemes
