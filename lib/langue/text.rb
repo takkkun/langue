@@ -12,11 +12,16 @@ module Langue
     end
 
     def words
-      @words ||= inject(&:+)
+      @words ||= inject([], &:+)
     end
 
     def morphemes
       @morphemes ||= Morphemes.new(flatten)
+    end
+
+    def text
+      @text = empty? ? nil : map(&:text).join unless instance_variable_defined?(:@text)
+      @text
     end
   end
 end

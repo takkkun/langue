@@ -1,5 +1,30 @@
 require 'langue/word'
 
+describe Langue do
+  %w(
+    Noun
+    Pronoun
+    Adjective
+    Verb
+    Adverb
+    Particle
+    Conjunction
+    Determiner
+    Interjection
+    Period
+  ).each do |part_of_speech|
+    it "has #{described_class}::#{part_of_speech}" do
+      Langue.should be_const_defined(part_of_speech)
+    end
+
+    describe part_of_speech do
+      it 'inherits Langue::Word' do
+        Langue.const_get(part_of_speech).superclass.should == Langue::Word
+      end
+    end
+  end
+end
+
 describe Langue::Word, '#valid?' do
   before do
     @word = described_class.new([
@@ -36,7 +61,7 @@ describe Langue::Word, '#morphemes' do
     @morphemes.should be_a Langue::Morphemes
   end
 
-  it 'returns ' do
+  it 'returns own morphemes' do
     @morphemes.should == [1, 2, 3]
   end
 end
@@ -64,18 +89,19 @@ describe Langue::Word, '#key_morpheme' do
 end
 
 describe Langue::Word, '#text' do
-  before do
+  it 'returns a concatenated string of the text of the morphemes' do
     word = described_class.new([
       stub.tap { |s| s.stub!(:text).and_return('text1') },
       stub.tap { |s| s.stub!(:text).and_return('text2') },
       stub.tap { |s| s.stub!(:text).and_return('text3') }
     ])
 
-    @text = word.text
+    word.text.should == 'text1text2text3'
   end
 
-  it 'returns a concatenated string of the text of the morphemes' do
-    @text.should == 'text1text2text3'
+  it 'returns nil if the word is empty' do
+    word = described_class.new
+    word.text.should be_nil
   end
 end
 

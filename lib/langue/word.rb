@@ -61,4 +61,15 @@ module Langue
                      end
     end
   end
+
+  class Noun         < Word; end
+  class Pronoun      < Word; end
+  class Adjective    < Word; end
+  class Verb         < Word; end
+  class Adverb       < Word; end
+  class Particle     < Word; end
+  class Conjunction  < Word; end
+  class Determiner   < Word; end
+  class Interjection < Word; end
+  class Period       < Word; end
 end

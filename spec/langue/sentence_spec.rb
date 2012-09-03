@@ -55,3 +55,19 @@ describe Langue::Sentence, '#morphemes' do
     @morphemes.should == [1, 2, 3, 4]
   end
 end
+
+describe Langue::Sentence, '#text' do
+  it 'returns a concatenated string of the text of the words' do
+    sentence = described_class.new([
+      stub(Langue::Word).tap { |s| s.stub!(:text).and_return('word1') },
+      stub(Langue::Word).tap { |s| s.stub!(:text).and_return('word2') }
+    ])
+
+    sentence.text.should == 'word1word2'
+  end
+
+  it 'returns nil if the sentence is empty' do
+    sentence = described_class.new
+    sentence.text.should be_nil
+  end
+end

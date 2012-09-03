@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'langue/morphemes'
 
 describe Langue::Morphemes, '#valid?' do
@@ -66,8 +67,72 @@ describe Langue::Morphemes, '#at' do
   end
 end
 
-# describe Langue::Morphemes, '#match?' do
-# end
+describe Langue::Morphemes, '#pad' do
+  before do
+    @morphemes = morphemes = described_class.new([
+      Langue::Morpheme.new(:text => 'text1'),
+      Langue::Morpheme.new(:text => 'text2'),
+      Langue::Morpheme.new(:text => 'text3')
+    ])
+  end
 
-# describe Langue::Morphemes, '#after' do
-# end
+  it 'pads \\x09' do
+    padded_morphemes = @morphemes.pad("text1\x09text2text3\x09")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x09"
+    morpheme.root_form.should == "\x09"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x09"
+    morpheme.root_form.should == "\x09"
+  end
+
+  it 'pads \\x0A' do
+    padded_morphemes = @morphemes.pad("text1\x0Atext2text3\x0A")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x0A"
+    morpheme.root_form.should == "\x0A"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x0A"
+    morpheme.root_form.should == "\x0A"
+  end
+
+  it 'pads \\x0B' do
+    padded_morphemes = @morphemes.pad("text1\x0Btext2text3\x0B")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x0B"
+    morpheme.root_form.should == "\x0B"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x0B"
+    morpheme.root_form.should == "\x0B"
+  end
+
+  it 'pads \\x0D' do
+    padded_morphemes = @morphemes.pad("text1\x0Dtext2text3\x0D")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x0D"
+    morpheme.root_form.should == "\x0D"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x0D"
+    morpheme.root_form.should == "\x0D"
+  end
+
+  it 'pads \\x20' do
+    padded_morphemes = @morphemes.pad("text1\x20text2text3\x20")
+    padded_morphemes.should have(5).items
+    morpheme = padded_morphemes[1]
+    morpheme.text.should == "\x20"
+    morpheme.root_form.should == "\x20"
+    morpheme = padded_morphemes[4]
+    morpheme.text.should == "\x20"
+    morpheme.root_form.should == "\x20"
+  end
+
+  it 'raises ArgumentError if there is a difference between the text and the morphemes' do
+    lambda { @morphemes.pad("text1\x20text3text4") }.should raise_error(ArgumentError, 'maybe different from the original text')
+    lambda { @morphemes.pad('text1text2text3text4text5') }.should raise_error(ArgumentError, 'maybe different from the original text')
+  end
+end

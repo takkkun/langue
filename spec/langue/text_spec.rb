@@ -54,6 +54,14 @@ describe Langue::Text, '#words' do
   it 'returns the words in the sentences' do
     @words.should == [[1, 2], [3, 4], [5, 6], [7, 8]]
   end
+
+  context 'with an empty text' do
+    it 'returns an empty array' do
+      text = described_class.new([])
+      text.words.should be_an(Array)
+      text.words.should be_empty
+    end
+  end
 end
 
 describe Langue::Text, '#morphemes' do
@@ -68,5 +76,21 @@ describe Langue::Text, '#morphemes' do
 
   it 'returns the morphemes in the words in the sentences' do
     @morphemes.should == [1, 2, 3, 4, 5, 6, 7, 8]
+  end
+end
+
+describe Langue::Text, '#text' do
+  it 'returns a concatenated string of the text of the sentences' do
+    text = described_class.new([
+      stub(Langue::Sentence).tap { |s| s.stub!(:text).and_return('sentence1') },
+      stub(Langue::Sentence).tap { |s| s.stub!(:text).and_return('sentence2') }
+    ])
+
+    text.text.should == 'sentence1sentence2'
+  end
+
+  it 'returns nil if the text is empty' do
+    text = described_class.new
+    text.text.should be_nil
   end
 end

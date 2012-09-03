@@ -47,6 +47,37 @@ describe Langue::Morpheme, ' accessors' do
   end
 end
 
+describe Langue::Morpheme, '#==' do
+  before do
+    @attrs = {
+      :text            => 'text',
+      :part_of_speech  => 'part_of_speech',
+      :categories      => %w(category1 category2),
+      :inflection      => 'inflection',
+      :inflection_type => 'inflection_type',
+      :root_form       => 'root_form',
+      :yomi            => 'yomi',
+      :pronunciation   => 'pronunciation'
+    }
+
+    @morpheme = described_class.new(@attrs)
+  end
+
+  it 'returns true if the morpheme equals to other morpheme' do
+    other_morpheme = described_class.new(@attrs)
+    @morpheme.should == other_morpheme
+  end
+
+  it 'returns false if the morpheme does not equal to other morpheme' do
+    other_morpheme = described_class.new(@attrs.merge(:pronunciation => 'other_pronunciation'))
+    @morpheme.should_not == other_morpheme
+  end
+
+  it "returns false if other morpheme is not an instance of #{described_class}" do
+    @morpheme.should_not == 'other_morpheme'
+  end
+end
+
 describe Langue::Morpheme, '#classified?' do
   before do
     @morpheme = described_class.new(
